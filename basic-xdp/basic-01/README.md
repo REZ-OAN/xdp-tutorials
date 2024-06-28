@@ -39,16 +39,21 @@ The tutorial's example shows how to write a **GO** program to load and attach an
 Firtly you have to navigate to `basic-xdp/basic-01/xdp-user-space-code` this directory
 
 Then follow the procedure:
-1. Generate necessary files using `bpf2go`
+1. Download the necessary modules
+```
+go mod tidy
+```
+2. Generate necessary files using `bpf2go`
 ```
 go generate
 ```
 ![go_generate_logs](https://github.com/REZ-OAN/xdp-tutorials/blob/main/basic-xdp/basic-01/images/go-generate-logs.png)
-2. Build the go binary. It will generate a file in the same directory called xdp-pass
+
+3. Build the go binary. It will generate a file in the same directory called xdp-pass
 ```
 go build
 ```
-3. Now run the binary with `-iface <interface name>` with `sudo` privileges
+4. Now run the binary with `-iface <interface name>` with `sudo` privileges
 ```
 sudo ./xdp-pass -iface veth-h
 ```

@@ -99,7 +99,7 @@ XDP programs processes network packets. So, it performs some operations on the p
 # Tutorials
 - Basic-XDP
     - [Environment Setup](https://github.com/REZ-OAN/xdp-tutorials/blob/main/basic-xdp/Environment-Setup)
-    - [Basic-01-attaching-detaching-xdp](https://github.com/REZ-OAN/xdp-tutorials/blob/main/basic-xdp/basic-01)
+    - [Basic-01-loading-attaching-detaching-xdp](https://github.com/REZ-OAN/xdp-tutorials/blob/main/basic-xdp/basic-01)
     - [Basic-02-selection-of-a-program](https://github.com/REZ-OAN/xdp-tutorials/blob/main/basic-xdp/basic-02)
     - [Basic-03-how-to-use-maps](https://github.com/REZ-OAN/xdp-tutorials/blob/main/basic-xdp/basic-03)
     - [Basic-04-pin-maps](https://github.com/REZ-OAN/xdp-tutorials/blob/main/basic-xdp/basic-04)

@@ -2,7 +2,7 @@
 
 ## Prerequisite
  - [Create Environment](https://github.com/REZ-OAN/xdp-tutorials/blob/main/basic-xdp/Environment-Setup/README.md)
- - [Basic-01 for loading,attaching,detaching using go](https://github.com/REZ-OAN/xdp-tutorials/tree/main/basic-xdp/basic-01#load-attach-detach-using-go)
+ - [Basic-01 for loading,attaching,detaching using go](https://github.com/REZ-OAN/xdp-tutorials/tree/main/basic-xdp/basic-01/#load-attach-detach-using-go)
 
 ## Demonstration
 Firtly you have to navigate to `basic-xdp/basic-02/xdp-user-space-code` this directory. After doing all the necessary steps from the prerequisite. You can proceed with following procedure :

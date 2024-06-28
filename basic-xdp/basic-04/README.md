@@ -1,4 +1,4 @@
-# Basic-03 (Learn map reading and updateing)
+# Basic-04 (Learn reading pinned map)
 
 ## Prerequisite
  - [Create Environment](https://github.com/REZ-OAN/xdp-tutorials/blob/main/basic-xdp/Environment-Setup/README.md)

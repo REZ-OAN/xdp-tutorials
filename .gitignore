@@ -1,3 +1,6 @@
 basic-xdp/basic*/xdp-kernel-space-code/*.o
 basic-xdp/basic*/xdp-user-space-code/xdp*
-
+basic-xdp/basic*/xdp-user-space-code/pin*/xdp*
+basic-xdp/basic*/xdp-user-space-code/read*/xdp*
+basic-xdp/basic*/xdp-user-space-code/pin*/*map
+basic-xdp/basic*/xdp-user-space-code/read*/*map

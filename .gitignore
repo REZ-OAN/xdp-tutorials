@@ -4,3 +4,6 @@ basic-xdp/basic*/xdp-user-space-code/pin*/xdp*
 basic-xdp/basic*/xdp-user-space-code/read*/xdp*
 basic-xdp/basic*/xdp-user-space-code/pin*/*map
 basic-xdp/basic*/xdp-user-space-code/read*/*map
+packet-processing-xdp/packet-processing*/kernel-space-code/*.o
+packet-processing-xdp/packet-processing*/user-space-code/xdp*
+packet-processing-xdp/packet-processing*/user-space-code/*parse

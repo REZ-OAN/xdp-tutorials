@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "if_ether.h": "c",
+        "if_packet.h": "c",
+        "ipv6.h": "c"
+    }
+}

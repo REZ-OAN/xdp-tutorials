@@ -38,8 +38,6 @@ int xdp_parser_func(struct xdp_md *ctx) {
     void *data_end = (void *)(long)ctx->data_end;
     void *data = (void *)(long)ctx->data;
     struct ethhdr *eth;
-    struct ipv6hdr *ip6;
-    struct icmp6hdr *icmp6;
 
     __u32 action = XDP_PASS;
 

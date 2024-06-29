@@ -29,7 +29,7 @@ func main() {
 		fmt.Println("[info] you're executing with default iface selection")
 	}
 
-	// loading the xdp_pass_kern program object
+	// loading the xdp_parser_func program object
 	spec, err := loadXdp_prog()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "[error] loading eBPF object: %v\n", err)

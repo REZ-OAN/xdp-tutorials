@@ -3,7 +3,7 @@
 ## Table of contents
  - [Introduction](#introduction)
  - [Definition of struct xdp_md](#definition-of-struct-xdp_md)
- - [Definition of stuct hdr_cursor](#definition-of-struct-hdr_cursor)
+ - [Definition of struct hdr_cursor](#definition-of-struct-hdr_cursor)
  - [Bound Checking](#bound-checking)
  - [Packet Header Definitions and Byte Order](#packet-header-definitions-and-byte-order)
  - [Function inlining](#function-inlining)
@@ -28,7 +28,7 @@ struct xdp_md {
 ```
 The last two items in this struct are just data fields which contain the **ifindex** and **RX queue index** that the packet was received on. The program can use this in its decision making (along with the packet data itself).
 
-The first three items are pointers, even though they use the `__u32` type. The data field points to the start of the packet, data_end points to the end, and data_meta points to the metadata area for extra information. In this lesson, we will focus on the data and data_end fields.
+The first three items are pointers, even though they use the `__u32` type. The **data** field points to the start of the packet, **data_end** points to the end, and **data_meta** points to the metadata area for extra information. In this lesson, we will focus on the `data` and `data_end` fields.
 ### Accessing Packet Data
 ```
 void *data = (void *)(long)ctx->data;
@@ -46,9 +46,9 @@ struct hdr_cursor {
 };
 ```
 ## Bound Checking
-In `XDP` programs, direct memory reads are used to access packet data. The verifier ensures these accesses are safe by checking that the program performs its own bounds checking. The data_end pointer indicates the end of the packet, helping the verifier ensure safety.
+In `XDP` programs, direct memory reads are used to access packet data. The verifier ensures these accesses are safe by checking that the program performs its own bounds checking. The `data_end` pointer indicates the end of the packet, helping the verifier ensure safety.
 
-At load time, the verifier performs static analysis, tracking memory address offsets and looking for comparisons with data_end. This ensures that any memory read within the packet data is within valid bounds, preventing out-of-bounds access.
+At load time, the verifier performs static analysis, tracking memory address offsets and looking for comparisons with `data_end`. This ensures that any memory read within the packet data is within valid bounds, preventing **out-of-bounds** access.
 
 For example, consider the following bounds check:
 ```

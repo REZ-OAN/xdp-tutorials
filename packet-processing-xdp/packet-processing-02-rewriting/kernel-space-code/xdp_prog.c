@@ -13,13 +13,6 @@
 #include <bpf/bpf_helpers.h>
 #include <bpf/bpf_endian.h>
 
-
-
-static __always_inline __u16 csum_fold_helper(__u32 csum) {
-    __u32 sum = (csum & 0xffff) + (csum >> 16);
-    sum = (sum & 0xffff) + (sum >> 16);
-    return (__u16)~sum;
-}
 // the header cursor to keep track of current parsing position
 
 struct hdr_cursor {
@@ -56,7 +49,7 @@ static __always_inline int parse_ip6hdr(struct hdr_cursor *hdr_p,
 	if ((void *)ip6h + sizeof(*ip6h) > data_end)
 		return -1;
 
-	hdr_p->pos = ip6h + 1;
+	hdr_p->pos += sizeof(*ip6h);
 	*ip6hdr = ip6h;
 
 	return ip6h->nexthdr;
@@ -96,7 +89,7 @@ static __always_inline int parse_udphdr(struct hdr_cursor *hdr_p,
 	if ((void *)h + sizeof(*h) > data_end)
 		return -1;
 
-	hdr_p->pos  = h + 1;
+	hdr_p->pos += sizeof(*h) ;
 	*udphdr = h;
 
 	len = bpf_ntohs(h->len) - sizeof(struct udphdr);
@@ -131,6 +124,11 @@ static __always_inline int parse_tcphdr(struct hdr_cursor *hdr_p,
 	return len;
 }
 
+static __always_inline __u16 csum_fold_helper(__u32 csum) {
+    __u32 sum = (csum & 0xffff) + (csum >> 16);
+    sum = (sum & 0xffff) + (sum >> 16);
+    return (__u16)~sum;
+}
 
 SEC("xdp")
 int xdp_rewrite_func(struct xdp_md *ctx) {
@@ -176,21 +174,20 @@ int xdp_rewrite_func(struct xdp_md *ctx) {
 	if(ip_type == IPPROTO_UDP) {
 		if(parse_udphdr(&hdr_p, data_end, &udphdr) < 0){
 			action = XDP_ABORTED;
-			bpf_printk("packet len is not valid -> aborting packet\n");
+			bpf_printk(" udp block packet len is not valid -> aborting packet\n");
 			return action;
 		}
-		struct udphdr udphdr_old;
-		__u32 csum = udphdr->check;
-		udphdr_old = *udphdr;
-		udphdr->dest = bpf_htons(bpf_ntohs(udphdr->dest) - 1);
-		csum = bpf_csum_diff((__be32 *)&udphdr_old, 4, (__be32 *)udphdr, 4, ~csum);
-		udphdr->check = csum_fold_helper(csum);
-		
+		 struct udphdr udphdr_old;
+		 __u32 csum = udphdr->check;
+		 udphdr_old = *udphdr;
+		 udphdr->dest = bpf_htons(bpf_ntohs(udphdr->dest) - 1);
+		 csum = bpf_csum_diff((__be32 *)&udphdr_old, 4, (__be32 *)udphdr, 4, ~csum);
+		 udphdr->check = csum_fold_helper(csum);
 
 	} else if (ip_type == IPPROTO_TCP) {
 			if (parse_tcphdr(&hdr_p, data_end, &tcphdr) < 0) {
 						action = XDP_ABORTED;
-						bpf_printk("packet len is not valid -> aborting packet\n");
+						bpf_printk("tcp block packet len is not valid -> aborting packet\n");
 						return action;
 					}
 			tcphdr->dest = bpf_htons(bpf_ntohs(tcphdr->dest) - 1);
@@ -199,7 +196,7 @@ int xdp_rewrite_func(struct xdp_md *ctx) {
 				tcphdr->check += bpf_htons(1);
 	} else {
 		action = XDP_ABORTED;
-        bpf_printk("ip_type is invalid -> aborting packet\n");
+        bpf_printk("none block ip_type is invalid -> aborting packet %d\n",ip_type);
 		return action;
 	}
 

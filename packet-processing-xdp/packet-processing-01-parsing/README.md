@@ -84,7 +84,7 @@ An XDP program receives a pointer to a raw data buffer and must parse packet hea
 Since the packet data comes straight off the wire, the data fields will be in network byte order. Use the `bpf_ntohs()` and `bpf_htons()` functions to convert to and from host byte order, respectively.
 
 ## Function Inlining 
-`eBPF` programs have limited support for function calls, so helper functions must be inlined into the main function. The __always_inline marker on the function definition ensures this, overriding the compiler's usual inlining decisions.
+`eBPF` programs have limited support for function calls, so helper functions must be inlined into the main function. The `__always_inline` marker on the function definition ensures this, overriding the compiler's usual inlining decisions.
 
 ## Demonstration 
 In the `kernel-space-code/xdp_prog.c` program parses the Ethernet header of incoming packets and checks if the packet is `IPv4` or `IPv6`. If it is either, the packet is passed to the next layer of the network stack (**XDP_PASS**). If the packet is of any other type, it is also passed to the next layer by default. The program does not currently take any other actions based on the packet content. 

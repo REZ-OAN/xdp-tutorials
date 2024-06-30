@@ -2,11 +2,17 @@
 
 ## Table of contents
  - [Introduction](#introduction)
+ - [Layout of an IP network packet](#layout-of-an-ip-network-packet)
  - [Demonstration](#demonstration)
 
 ## Introduction
 In packet-processing-01, you've mastered packet parsing by learning to structure it effectively, ensuring proper bounds checking to access packet data safely, and using return codes to determine the packet's outcome. Building on this foundation, the next lesson demonstrates how to effectively modify packet contents.
 
+## Layout of an IP network packet
+Layout of an IP network packet, starting with an Ethernet header, followed
+by an IP header, and then the Layer 4 data :
+
+![ip-network-packet-layout](https://github.com/REZ-OAN/xdp-tutorials/blob/main/packet-processing-xdp/packet-processing-02-rewriting/images/packet-data.png)
 ## Demonstration 
 This **eBPF** program intercepts and modifies packets at the `XDP` layer based on Ethernet and IP header information. It demonstrates how eBPF can be used for inline packet processing, manipulating **UDP** and **TCP** headers in-flight while ensuring robust error handling and checksum validation.
 Mainly we are manipulating the **UDP** and **TCP** headers :

@@ -1,8 +1,5 @@
 # Makefile
 
-BUILD=build
-CLEAN=clean
-
 # Default values, can be overridden by changing the values
 
 VETH0 = veth-h-1

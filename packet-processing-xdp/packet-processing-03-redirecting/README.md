@@ -108,11 +108,13 @@ go generate
 ```
 go build
 ```
-4. Enter into the network namespace `ns1`
+4. Go to this `packet-processing-xdp/packet-processing-03-redirecting/` directory and  enter into the network namespace `ns1`
 ```
-make exec_ns1
+make exec_ns1packet-processing-xdp/packet-processing-03-redirecting/
 ```
-5. Now run the binary with `sudo` privileges. This requires a argument `-iface <interface name>`.
+5. Now go to this `packet-processing-xdp/packet-processing-03-redirecting/user-space-code` directory from the network namespace `ns1` and
+
+   run the binary with `sudo` privileges. This requires a argument `-iface <interface name>`.
 ```
 sudo ./xdp-redirect -iface veth-ns1-1
 ```

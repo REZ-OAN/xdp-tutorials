@@ -110,7 +110,7 @@ go build
 ```
 4. Go to this `packet-processing-xdp/packet-processing-03-redirecting/` directory and  enter into the network namespace `ns1`
 ```
-make exec_ns1packet-processing-xdp/packet-processing-03-redirecting/
+make exec_ns1
 ```
 5. Now go to this `packet-processing-xdp/packet-processing-03-redirecting/user-space-code` directory from the network namespace `ns1` and
 

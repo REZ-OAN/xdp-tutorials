@@ -8,3 +8,5 @@ packet-processing-xdp/packet-processing*/kernel-space-code/*.o
 packet-processing-xdp/packet-processing*/user-space-code/xdp*
 packet-processing-xdp/packet-processing*/user-space-code/*parse
 packet-processing-xdp/packet-processing*/user-space-code/packet*
+tasks/*/kernel-space-code/*.o
+tasks/*/user-space-code/xdp*

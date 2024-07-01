@@ -107,6 +107,9 @@ XDP programs processes network packets. So, it performs some operations on the p
     - [Packet-Processing-01-header-parsing](https://github.com/REZ-OAN/xdp-tutorials/blob/main/packet-processing-xdp/packet-processing-01-parsing)
     - [packet-processing-02-rewriting](https://github.com/REZ-OAN/xdp-tutorials/blob/main/packet-processing-xdp/packet-processing-02-rewriting)
     - [packet-processing-03-redirecting](https://github.com/REZ-OAN/xdp-tutorials/blob/main/packet-processing-xdp/packet-processing-03-redirecting)
+- Tasks
+    - [xdp-abort](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/xdp-abort-porgram)
+    - [per-cpu-stats](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/per-cpu-stats)
 # References
 - [xdp-project/xdp-tutorial](https://github.com/xdp-project/xdp-tutorial)
 - [Academic Paper](https://github.com/xdp-project/xdp-paper/blob/master/xdp-the-express-data-path.pdf)

@@ -110,6 +110,8 @@ XDP programs processes network packets. So, it performs some operations on the p
 - Tasks
     - [xdp-abort](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/xdp-abort-porgram)
     - [per-cpu-stats](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/per-cpu-stats)
+    - [parsing-ip-headers](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/parsing-ip-header)
+    - [parsing-icmp-headers take action based on sequence number](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/parsing-ICMP-headers)
 # References
 - [xdp-project/xdp-tutorial](https://github.com/xdp-project/xdp-tutorial)
 - [Academic Paper](https://github.com/xdp-project/xdp-paper/blob/master/xdp-the-express-data-path.pdf)

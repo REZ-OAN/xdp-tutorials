@@ -141,7 +141,7 @@ sudo ./xdp-vlan-parsing -iface veth-ns1-1
         ```
             ip addr show
         ```
-![ip-address-overview]((https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/adding-vlan-support/images/get-ip-addresses.png)
+![ip-address-overview](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/adding-vlan-support/images/get-ip-addresses.png)
  - Now open two terminal side by side.
     - In one terminal enter into `ns2`. Using the following command
     ```
@@ -153,14 +153,14 @@ sudo ./xdp-vlan-parsing -iface veth-ns1-1
     ```
 On the terminal you have entered into `ns2` do the followings :
  - PING IPv4 packets to `veth0`
-![ping-logs-ipv4-veth0](tasks/adding-vlan-support/images/pingipv4toveth0.png)
+![ping-logs-ipv4-veth0](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/adding-vlan-support/images/pingipv4toveth0.png)
 
  - PING IPv6 packets to `veth0`
-![ping-logs-ipv6-veth0](tasks/adding-vlan-support/images/pingipv6toveth0.png)
+![ping-logs-ipv6-veth0](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/adding-vlan-support/images/pingipv6toveth0.png)
 
  - PING IPv4 packets to `veth0.100`
-![ping-logs-ipv4-veth0.100](tasks/adding-vlan-support/images/pingIpv4toveth0.100.png)
+![ping-logs-ipv4-veth0.100](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/adding-vlan-support/images/pingIpv4toveth0.100.png)
 
  - PING IPv6 packets to `veth0.100`
-![ping-logs-ipv6-veth0.100](tasks/adding-vlan-support/images/pingivp6toveth0.100.png)
+![ping-logs-ipv6-veth0.100](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/adding-vlan-support/images/pingivp6toveth0.100.png)
 

@@ -4,6 +4,8 @@
         "if_packet.h": "c",
         "ipv6.h": "c",
         "udp.h": "c",
-        "ip.h": "c"
+        "ip.h": "c",
+        "bpf.h": "c",
+        "if_vlan.h": "c"
     }
 }

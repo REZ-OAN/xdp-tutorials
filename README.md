@@ -114,6 +114,7 @@ XDP programs processes network packets. So, it performs some operations on the p
     - [parsing-icmp-headers take action based on sequence number](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/parsing-ICMP-headers)
     - [adding-vlan-support and extract ip header and arp header](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/adding-vlan-support)
     - [removing-outermost-vlan-tags](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/remove-outermost-VLAN-tag)
+    - [add-back-a-missing-VLAN-tag](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/add-back-a-missing-VLAN-tag)
 # References
 - [xdp-project/xdp-tutorial](https://github.com/xdp-project/xdp-tutorial)
 - [Academic Paper](https://github.com/xdp-project/xdp-paper/blob/master/xdp-the-express-data-path.pdf)

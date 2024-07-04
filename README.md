@@ -120,3 +120,4 @@ XDP programs processes network packets. So, it performs some operations on the p
 - [Academic Paper](https://github.com/xdp-project/xdp-paper/blob/master/xdp-the-express-data-path.pdf)
 - [Cilium BPF](https://docs.cilium.io/en/latest/bpf/)
 - [Netdev Conference](https://www.netdevconf.org/0x13/session.html?tutorial-XDP-hands-on)
+- [Learning eBPF by Liz Rice](https://isovalent.com/books/learning-ebpf/)

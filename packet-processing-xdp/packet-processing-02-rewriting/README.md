@@ -1,11 +1,5 @@
 # Packet-Processing-02 (Learn rewrite the packet by changing ports)
 
-## Table of contents
- - [Introduction](#introduction)
- - [Layout of an IP network packet](#layout-of-an-ip-network-packet)
- - [IPv4 Packet Varying In Size](#ipv4-packet-varying-in-size)
- - [Demonstration](#demonstration)
-
 ## Introduction
 In packet-processing-01, you've mastered packet parsing by learning to structure it effectively, ensuring proper bounds checking to access packet data safely, and using return codes to determine the packet's outcome. Building on this foundation, the next lesson demonstrates how to effectively modify packet contents.
 

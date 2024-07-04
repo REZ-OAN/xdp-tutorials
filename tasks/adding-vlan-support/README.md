@@ -1,4 +1,4 @@
-# Adding VLAN support while Parsing eth_hdr
+# Adding VLAN support while parsing ethernet header
 
 ## Table of contents
  - [Prerequisite](#prerequisite)
@@ -100,6 +100,7 @@ make clean
 
 Provided XDP program parses Ethernet frames, handles VLAN tags, and identifies whether the packet is IPv4, IPv6, or ARP. Based on the packet type, it either logs information about the packet or drops it.
 
+![pacekt-flow](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/adding-vlan-support/images/packet-flow.png)
 
 Let's try on your own how it works :
 

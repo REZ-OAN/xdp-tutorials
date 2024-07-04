@@ -1,11 +1,5 @@
-# Adding VLAN tags to ethernet packets
+# Adding VLAN tags to a packet (which does not contain vlan tags)
 
-## Table of contents
- - [Prerequisite](#prerequisite)
- - [Introduction](#introduction)
- - [How to move the pointer on ctx](#how-to-move-the-pointer-on-ctx)
- - [Demonstration](#demonstration)
- 
 ## Prerequisite
  - [How VLAN works and see the packet structure](https://github.com/REZ-OAN/xdp-tutorials/blob/main/docs/vlan-working.md)
 ## Introduction
@@ -19,6 +13,7 @@ bpf_xdp_adjust_head(ctx, 0 - vlh_size)
 ## Demonstration 
 In this environment we are gonna send icmp packets from the `ns2` network namespace to `ns1`. In `ns1` on `veth0` a xdp program is attached which is responsible for adding the vlan tags to the incomming packets.
 
+![packet-flow](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/add-back-a-missing-VLAN-tag/images/packet-flow.png)
 
 Let's try on your own how it works :
 

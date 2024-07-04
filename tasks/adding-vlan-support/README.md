@@ -124,7 +124,7 @@ make exec_ns1
 
    run the binary with `sudo` privileges. This requires a argument `-iface <interface name>`.
 ```
-sudo ./xdp-vlan-parsing -iface veth-ns1-1
+sudo ./xdp-vlan-parsing -iface veth0
 ```
 
 ### Testing result

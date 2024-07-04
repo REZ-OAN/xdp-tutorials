@@ -1,4 +1,4 @@
-# Removing the Outer Most VLAN tags 
+# Adding VLAN tags to ethernet packets
 
 ## Table of contents
  - [Prerequisite](#prerequisite)
@@ -14,7 +14,7 @@ Now that you have come this far, you know how to parse the vlan tags data from t
 ## How to move the pointer on ctx
 The `bpf_xdp_adjust_head` function is used to adjust the packet's data pointer, effectively modifying the beginning of the packet. In this specific call, it is used to remove the VLAN header from the packet.
 ```
-bpf_xdp_adjust_head(ctx, (int)sizeof(*vlh))
+bpf_xdp_adjust_head(ctx, 0 - vlh_size)
 ```
 ## Demonstration 
 In this environment we are gonna send icmp packets from the `ns2` network namespace to `ns1`. In `ns1` on `veth0` a xdp program is attached which is responsible for adding the vlan tags to the incomming packets.

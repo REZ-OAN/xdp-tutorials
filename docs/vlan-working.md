@@ -10,6 +10,19 @@ VLANs use tags to identify and separate traffic. Each Ethernet frame can carry a
 - **Access Ports**: These are connected to end devices and typically belong to a single VLAN. They don't carry VLAN tags.
 - **Trunk Ports**: These are used to connect switches or other network devices. Trunk ports can carry traffic from multiple VLANs, and the frames are tagged with VLAN IDs.
 
+## Packet Structure 
+- Without VLAN tags
+```
+| Destination MAC | Source MAC  | EtherType | IP Header | Payload |
+| 6 bytes         | 6 bytes     | 2 bytes   | 20+ bytes | ...     |
+
+```
+- With VLAN tags
+```
+| Destination MAC | Source MAC  | TPID    | TCI     | EtherType | IP Header | Payload |
+| 6 bytes         | 6 bytes     | 0x8100  | 2 bytes | 2 bytes   | 20+ bytes | ...     |
+
+```
 ## Working Process 
 - **Tagging**
     When a packet is transmitted on a VLAN, it is tagged with a VLAN ID. The tag is added to the Ethernet frame and includes a 12-bit VLAN identifier, which allows for 4096 possible VLANs.

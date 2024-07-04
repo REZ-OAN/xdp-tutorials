@@ -49,43 +49,52 @@ sudo ./xdp-remove-outer-most-vlan-tags -iface veth0
 ### Testing result
  - Open four terminal windows and go to this directory  `tasks/remove-outermost-VLAN-tag` on three of the terminals. And do the followings :
     - In first terminal
+
     ```
     make exec_ns2
     ```
     - In second terminal
+
     ```
     make exec_ns1
     ``` 
     - In third terminal
+
     ```
     make exec_ns2
     ```
     - In fourth terminal
+
     ```
     sudo bpftool prog tracelog
     ```
 - In the second terminal analyzing the incomming and outgoing packets using `tcpdump`
+
 ```
 sudo tcpdump -i veth0 -vv
 ```
 - In the third terminal analyzing the incomming and outgoing packets using `tcpdump`
+
 ```
 sudo tcpdump -i veth1 -vv
 ```
 - Now ping from the first termnal 
     - To `veth0.100` send IPv4 packets
+
         ```
         ping -c 3 -I veth1.100 192.168.89.3
         ```
     ![ping-to-veth0.100-ipv4](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/remove-outermost-VLAN-tag/images/ipv4-test.png)
 
     - To `veth0` send IPv4 packets
+
         ```
         ping -c 3 -I veth1.100 192.168.5.3
         ```
     ![ping-to-veth0-ipv4](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/remove-outermost-VLAN-tag/images/ipv4-to-veth0.png)
 
     - To `ns1` send IPv6 packets    
+
         ```
         ping -c 3 -I veth1.100 fe80::1c49::4ff::fe16::d5a8
         ```

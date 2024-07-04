@@ -96,7 +96,7 @@ sudo tcpdump -i veth1 -vv
     - To `ns1` send IPv6 packets    
 
         ```
-        ping -c 3 -I veth1.100 fe80::1c49::4ff::fe16::d5a8
+        ping6 -c 3 -I veth1.100 fe80::1c49::4ff::fe16::d5a8
         ```
 
     ![ping-to-ns1-ipv6](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/remove-outermost-VLAN-tag/images/ipv6-test.png)

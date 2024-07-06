@@ -4,7 +4,7 @@
 Now that you have come this far, you know how to parse packet data, know how to rewrite packets. we can improve it to also correctly swap the ip and mac, as an example of how to redirect packets when comes to an interface.
 
 ## Defining common icmpheader struct 
-We don't need the full struct of the icmp header for IPv4 or IPv6. There are some common part we need only those. So we declare icmphdr_common:
+We don't need the full struct of the icmp header for `IPv4` or `IPv6`. There are some common part we need only those. So we declare `icmphdr_common`:
 ```
 struct icmphdr_common {
 	__u8		type;

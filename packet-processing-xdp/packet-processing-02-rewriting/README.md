@@ -20,6 +20,9 @@ Mainly we are manipulating the **UDP** and **TCP** headers :
 
 Adjusting the destination port, actually we are **decreasing** the `port` by `1`.
 
+### Packet Flow
+
+![packet-flow](https://github.com/REZ-OAN/xdp-tutorials/blob/main/packet-processing-xdp/packet-processing-02-rewriting/images/packet-flow.png)
 Let's try on your own how it works :
 
 Firtly you have to navigate to `packet-processing-xdp/packet-processing-02-rewriting/user-space-code` this directory. Now You can proceed with following procedure :

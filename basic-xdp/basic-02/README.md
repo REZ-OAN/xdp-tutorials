@@ -4,6 +4,12 @@
  - [Create Environment](https://github.com/REZ-OAN/xdp-tutorials/blob/main/basic-xdp/Environment-Setup/README.md)
 
 ## Demonstration
+
+### Packet Flow
+
+![packet-flow](https://github.com/REZ-OAN/xdp-tutorials/blob/main/basic-xdp/basic-02/images/packet-flow.png)
+
+
 Firtly you have to navigate to `basic-xdp/basic-02/xdp-user-space-code` this directory. After doing all the necessary steps from the prerequisite. You can proceed with following procedure :
 1. Download the necessary modules
 ```

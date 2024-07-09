@@ -30,7 +30,7 @@ int xdp_redirect(struct xdp_md *ctx)
     struct iphdr *ip_header;
     eth_header = data;
     if ((void *)eth_header + sizeof(*eth_header) > data_end) {
-        return XDP_PASS;
+        return XDP_DROP;
     }
 
 
@@ -38,15 +38,15 @@ int xdp_redirect(struct xdp_md *ctx)
 
     /* anything that is not IPv4 (including ARP) goes up to the kernel */
     if (h_proto != bpf_htons(ETH_P_IP)) {  // htons(ETH_P_IP) -> 0x08U
-        return XDP_PASS;
+        return XDP_DROP;
     }
     ip_header = data + sizeof(*eth_header);
     if ((void *)ip_header + sizeof(*ip_header) > data_end) {
-        return XDP_PASS;
+        return XDP_DROP;
     }
 
     if (ip_header->protocol != IPPROTO_ICMP) { // IPPROTO_ICMP = 1
-        return XDP_PASS;
+        return XDP_DROP;
     }
 
     // if icmp, we send it back to the gateway

@@ -34,20 +34,7 @@ setup_network:
 	sudo ip addr add $(BRIDGE_IP)/$(NETMASK) dev $(BRIDGE)
 	sudo ip netns exec $(NS1) ip link set lo up
 	sudo ip netns exec $(NS2) ip link set lo up
-	# sudo ip netns exec $(NS1) ip route add default via $(BRIDGE_IP)
-	# sudo ip netns exec $(NS2) ip route add default via $(BRIDGE_IP)
 	sudo sysctl -w net.ipv4.ip_forward=1
-set_rules:
-	sudo iptables -A FORWARD -i $(BRIDGE) -o $(VETH0_BR) -j ACCEPT
-	sudo iptables -A FORWARD -i $(BRIDGE) -o $(VETH1_BR) -j ACCEPT
-	sudo iptables -A FORWARD -i $(VETH0_BR) -o $(BRIDGE) -j ACCEPT
-	sudo iptables -A FORWARD -i $(VETH1_BR) -o $(BRIDGE) -j ACCEPT
-
-del_rules :
-	sudo iptables --delete FORWARD --in-interface $(VETH0_BR) --jump ACCEPT
-	sudo iptables --delete FORWARD --out-interface $(VETH1_BR) --jump ACCEPT
-	sudo iptables --delete FORWARD --in-interface $(VETH1_BR) --jump ACCEPT
-	sudo iptables --delete FORWARD --out-interface $(VETH0_BR) --jump ACCEPT
 
 exec_ns1:
 	sudo ip netns exec $(NS1) bash

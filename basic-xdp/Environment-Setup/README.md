@@ -3,6 +3,7 @@
 In this setup we will create a network namespace, and create a veth-pair to communicate with the host machine from the created network namespace.
 
 ![environment-overview](https://github.com/REZ-OAN/xdp-tutorials/blob/main/basic-xdp/Environment-Setup/images/environment-setup.png)
+
 Default setup uses following `default_arguments`
 ```
 NS_NAME = test-ns

@@ -34,7 +34,9 @@ The command disassembles the object file `xdp_prog.o` to show the human-readable
 As you should understand by now, the BPF byte code is stored in an **ELF** file. To load `BPF` byte code from an ELF file into the kernel, you need an ELF loader. The `libbpf` library provides this, plus BPF helper functions, supporting BPF Type Format (`BTF`) and [CO-RE](https://nakryiko.com/posts/bpf-core-reference-guide/) relocation. `libxdp` builds on `libbpf` for managing XDP programs and **AF_XDP** sockets.
 
 The tutorial's example shows how to write a **GO** program to load and attach an XDP program from `xdp_prog.o` to a network device. While this approach helps integrate BPF into other projects, you can also use tools like `iproute2` or `xdp-loader` from **xdp-tools**.
+## Packet Flow of Implemented `xdp_prog`
 
+![pacekt-flow](https://github.com/REZ-OAN/xdp-tutorials/blob/main/basic-xdp/basic-01/images/packet-flow.png)
 ## Load-Attach-Detach Using GO
 Firtly you have to navigate to `basic-xdp/basic-01/xdp-user-space-code` this directory
 

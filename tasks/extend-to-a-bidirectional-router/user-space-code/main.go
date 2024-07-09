@@ -28,8 +28,9 @@ var dest_ip string
 var router_ip string
 var src_mac string
 var dest_mac string
-var dest_iface_id string
-var src_iface_id string
+var router_mac string
+var dest_id string
+var src_id string
 
 type MacAddr struct {
 	Addr [ETH_ALEN]byte
@@ -42,10 +43,11 @@ type Collect struct {
 }
 
 type backend struct {
-	saddr   uint32
-	daddr   uint32
-	hwaddr  [6]byte
-	ifindex uint16
+	saddr    uint32
+	daddr    uint32
+	h_source [6]byte
+	h_dest   [6]byte
+	iface    uint32
 }
 
 // parseMAC parses a MAC address string and returns an MacAddr.
@@ -93,34 +95,36 @@ func main() {
 	flag.StringVar(&dest_ip, "dest_ip", "", "destination IP address")
 	flag.StringVar(&dest_mac, "dest_mac", "", "destination MAC address")
 	flag.StringVar(&src_mac, "src_mac", "", "source MAC address")
-	flag.StringVar(&dest_iface_id, "dest_id", "", "destination interface id")
-	flag.StringVar(&src_iface_id, "src_id", "", "source interface id")
-
+	flag.StringVar(&router_mac, "router_mac", "", "rotuer MAC address")
+	flag.StringVar(&dest_id, "dest_id", "", "destination interface id")
+	flag.StringVar(&src_id, "src_id", "", "source interface id")
 	flag.Parse()
 
-	if iface == "" || dest_ip == "" || src_ip == "" || dest_iface_id == "" {
+	if src_id == "" || dest_id == "" || iface == "" || dest_ip == "" || src_ip == "" || router_ip == "" || router_mac == "" || src_mac == "" || dest_mac == "" {
 		fmt.Println("[error] interface name not given")
 		os.Exit(1)
 	}
 	source_ip := parseIP(src_ip)
 	destination_ip := parseIP(dest_ip)
 	// router_IP := parseIP(router_ip)
+	// router_MAC := parseMAC(router_mac)
 	source_mac := parseMAC(src_mac)
 	destination_mac := parseMAC(dest_mac)
-	dest_iface_Id, _ := strconv.ParseUint(dest_iface_id, 10, 16)
-	src_iface_Id, _ := strconv.ParseUint(src_iface_id, 10, 16)
-
+	dest_ID, _ := strconv.ParseUint(dest_id, 10, 32)
+	src_ID, _ := strconv.ParseUint(src_id, 10, 32)
 	bk2 := backend{
-		saddr:   source_ip,
-		daddr:   destination_ip,
-		hwaddr:  destination_mac.Addr,
-		ifindex: uint16(dest_iface_Id),
+		saddr:    source_ip,
+		daddr:    destination_ip,
+		h_source: source_mac.Addr,
+		h_dest:   destination_mac.Addr,
+		iface:    uint32(dest_ID),
 	}
 	bk1 := backend{
-		saddr:   destination_ip,
-		daddr:   source_ip,
-		hwaddr:  source_mac.Addr,
-		ifindex: uint16(src_iface_Id),
+		saddr:    destination_ip,
+		daddr:    source_ip,
+		h_dest:   source_mac.Addr,
+		h_source: destination_mac.Addr,
+		iface:    uint32(src_ID),
 	}
 	// loading the xdp_parser_func program object
 	spec, err := loadXdp_prog()

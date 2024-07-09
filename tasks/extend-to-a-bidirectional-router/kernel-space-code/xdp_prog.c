@@ -15,8 +15,9 @@
 struct backend {
     __u32 saddr;
     __u32 daddr;
-    unsigned char hwaddr[6];
-    __u16 ifindex;
+    unsigned char h_source[6];
+    unsigned char h_dest[6];
+    __u32 iface;
 };
 
 struct {
@@ -124,7 +125,6 @@ static __always_inline int parse_arphdr(struct hdr_cursor *hdr_p, void *data_end
     return arph->ar_op;
 }
 
-
 static __always_inline void construct_arp_reply(struct ethhdr *eth, struct arp_hdr *arph) {
     unsigned char tmp_mac[ETH_ALEN];
     __u32 tmp_ip;
@@ -147,6 +147,7 @@ static __always_inline void construct_arp_reply(struct ethhdr *eth, struct arp_h
     __builtin_memcpy(arph->ar_sip, arph->ar_tip, sizeof(tmp_ip));
     __builtin_memcpy(arph->ar_tip, &tmp_ip, sizeof(tmp_ip));
 }
+
 
 SEC("xdp")
 int xdp_redirect_router(struct xdp_md *ctx) {
@@ -179,8 +180,8 @@ int xdp_redirect_router(struct xdp_md *ctx) {
         }
         bpf_printk("Protocol %d\n",ip_type);
 
-    }   else if (packet_type == bpf_htons(ETH_P_ARP)) {
-        bpf_printk("Got ARP packet\n");
+    } else if (packet_type == bpf_htons(ETH_P_ARP)) {
+            bpf_printk("Got ARP packet\n");
         int arp_op = parse_arphdr(&hdr_p, data_end, &arph);
         if (arp_op < 0) {
             bpf_printk("Error parsing ARP header\n");
@@ -202,8 +203,8 @@ int xdp_redirect_router(struct xdp_md *ctx) {
                 return XDP_DROP;
             }
             // Update Ethernet header
-            __builtin_memcpy(eth->h_dest, dest->hwaddr, ETH_ALEN);
-            return bpf_redirect(dest->ifindex, 0);
+            __builtin_memcpy(eth->h_dest, dest->h_dest, ETH_ALEN);
+            return bpf_redirect(dest->iface, 0);
         }
     } else {
         bpf_printk("We don't process with these kindof packets\n");
@@ -212,24 +213,22 @@ int xdp_redirect_router(struct xdp_md *ctx) {
     __u32 saddr = iph->saddr;
     bpf_printk("original source MAC %x:%x:%x:%x:%x:%x", eth->h_source[0], eth->h_source[1], eth->h_source[2], eth->h_source[3], eth->h_source[4], eth->h_source[5]);
     bpf_printk("original dest MAC %x:%x:%x:%x:%x:%x", eth->h_dest[0], eth->h_dest[1], eth->h_dest[2], eth->h_dest[3], eth->h_dest[4], eth->h_dest[5]);
-
+    bpf_printk("original source ip : %d",iph->saddr);
+    bpf_printk("original dest ip : %d\n",iph->daddr);
     dest = bpf_map_lookup_elem(&redirect_packets,&saddr);
-    bpf_printk("Source : %d\n",iph->saddr);
     if(!dest){
         bpf_printk("Source Not Found In the MAP\n");
         return XDP_DROP;
     }
-    bpf_printk("Changed iph source from this %d to this %d",iph->saddr, dest->saddr);
+    __builtin_memcpy(eth->h_source, dest->h_source, ETH_ALEN);
+    __builtin_memcpy(eth->h_dest, dest->h_dest, ETH_ALEN);
+    bpf_printk("Changed source MAC %x:%x:%x:%x:%x:%x", eth->h_source[0], eth->h_source[1], eth->h_source[2], eth->h_source[3], eth->h_source[4], eth->h_source[5]);
+    bpf_printk("Changed dest MAC %x:%x:%x:%x:%x:%x", eth->h_dest[0], eth->h_dest[1], eth->h_dest[2], eth->h_dest[3], eth->h_dest[4], eth->h_dest[5]);
     iph->saddr = dest->saddr;
-    bpf_printk("Changed iph Destination from this %d to this %d",iph->daddr, dest->daddr);
     iph->daddr = dest->daddr;
-    
-
-    __builtin_memcpy(eth->h_source, eth->h_dest, ETH_ALEN);
-    bpf_printk("new source hwaddr %x:%x:%x:%x:%x:%x", eth->h_source[0], eth->h_source[1], eth->h_source[2], eth->h_source[3], eth->h_source[4], eth->h_source[5]);
-    __builtin_memcpy(eth->h_dest,dest->hwaddr,sizeof(eth->h_dest));
-    bpf_printk("new dest hwaddr %x:%x:%x:%x:%x:%x", eth->h_dest[0], eth->h_dest[1], eth->h_dest[2], eth->h_dest[3], eth->h_dest[4], eth->h_dest[5]);
-    bpf_redirect(dest->ifindex, 0);
+    bpf_printk("Changed source ip : %d",iph->saddr);
+    bpf_printk("Changed dest ip : %d\n",iph->daddr);
+    bpf_redirect(dest->iface,0);
     return XDP_TX;
 
 }

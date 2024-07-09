@@ -96,6 +96,7 @@ The lookup result determines whether the packet should be dropped, passed, or re
 ### Packet Flow
 
 ![packet-flow](https://github.com/REZ-OAN/xdp-tutorials/blob/main/packet-processing-xdp/packet-processing-03-redirecting/images/packet-flow.png)
+
 Let's try on your own how it works :
 
 Firtly you have to navigate to `packet-processing-xdp/packet-processing-03-redirecting/user-space-code` this directory. Now You can proceed with following procedure :

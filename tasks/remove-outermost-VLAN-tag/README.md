@@ -14,6 +14,8 @@ bpf_xdp_adjust_head(ctx, (int)sizeof(*vlh))
 ## Demonstration 
 In this environment we are gonna send vlan packets from the `ns2` network namespace to `ns1`. In `ns1` on `veth0` a xdp program is attached which is responsible for removing the outer-most vlan tags from the incomming packets.
 
+### Packet Flow 
+
 ![packet-flow](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/remove-outermost-VLAN-tag/images/packet-flow.png)
 
 Let's try on your own how it works :

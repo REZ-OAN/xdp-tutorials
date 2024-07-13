@@ -13,6 +13,8 @@ bpf_xdp_adjust_head(ctx, 0 - vlh_size)
 ## Demonstration 
 In this environment we are gonna send icmp packets from the `ns2` network namespace to `ns1`. In `ns1` on `veth0` a xdp program is attached which is responsible for adding the vlan tags to the incomming packets.
 
+### Packet Flow 
+
 ![packet-flow](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/add-back-a-missing-VLAN-tag/images/packet-flow.png)
 
 Let's try on your own how it works :

@@ -116,6 +116,7 @@ XDP programs processes network packets. So, it performs some operations on the p
     - [Task-06 (removing outermost vlan tags)](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/remove-outermost-VLAN-tag)
     - [Task-07 (adding vlan tags to a packet)](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/add-back-a-missing-VLAN-tag)
     - [Task-08 (send-packets-back-where-they-come-from)](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/send-packets-back-where-they-come-from)
+    - [Task-09 (create a bidirectional router)](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/extend-to-a-bidirectional-router)
 # References
 - [xdp-project/xdp-tutorial](https://github.com/xdp-project/xdp-tutorial)
 - [Academic Paper](https://github.com/xdp-project/xdp-paper/blob/master/xdp-the-express-data-path.pdf)

@@ -13,7 +13,7 @@ NS2_IP ?= 10.10.20.7
 BRIDGE_IP ?= 10.10.20.19
 NETMASK = 24
 
-setup_network:
+setup:
 	@echo "Setting up network namespaces and bridge..."
 	sudo ip netns add $(NS1)
 	sudo ip netns add $(NS2)

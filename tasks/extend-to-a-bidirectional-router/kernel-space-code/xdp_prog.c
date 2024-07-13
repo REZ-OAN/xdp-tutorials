@@ -211,9 +211,19 @@ int xdp_redirect_router(struct xdp_md *ctx) {
         return XDP_PASS;
     }
     __u32 saddr = iph->saddr;
-    bpf_printk("original source MAC %x:%x:%x:%x:%x:%x", eth->h_source[0], eth->h_source[1], eth->h_source[2], eth->h_source[3], eth->h_source[4], eth->h_source[5]);
-    bpf_printk("original dest MAC %x:%x:%x:%x:%x:%x", eth->h_dest[0], eth->h_dest[1], eth->h_dest[2], eth->h_dest[3], eth->h_dest[4], eth->h_dest[5]);
-    bpf_printk("original source ip : %d",iph->saddr);
+    bpf_printk("Changed source MAC = ");
+    #pragma unroll
+    for(int i=0; i<6; i++){
+        bpf_printk("%x",eth->h_source[i]);
+    }
+    bpf_printk("\n");
+    bpf_printk("Changed dest MAC = ");
+        #pragma unroll
+    for(int i=0; i<6; i++){
+        bpf_printk("%x",eth->h_dest[i]);
+    }
+    bpf_printk("\n");
+    bpf_printk("original source ip : %d\n",iph->saddr);
     bpf_printk("original dest ip : %d\n",iph->daddr);
     dest = bpf_map_lookup_elem(&redirect_packets,&saddr);
     if(!dest){
@@ -222,8 +232,19 @@ int xdp_redirect_router(struct xdp_md *ctx) {
     }
     __builtin_memcpy(eth->h_source, dest->h_source, ETH_ALEN);
     __builtin_memcpy(eth->h_dest, dest->h_dest, ETH_ALEN);
-    bpf_printk("Changed source MAC %x:%x:%x:%x:%x:%x", eth->h_source[0], eth->h_source[1], eth->h_source[2], eth->h_source[3], eth->h_source[4], eth->h_source[5]);
-    bpf_printk("Changed dest MAC %x:%x:%x:%x:%x:%x", eth->h_dest[0], eth->h_dest[1], eth->h_dest[2], eth->h_dest[3], eth->h_dest[4], eth->h_dest[5]);
+
+    bpf_printk("Changed source MAC = ");
+    #pragma unroll
+    for(int i=0; i<6; i++){
+        bpf_printk("%x",eth->h_source[i]);
+    }
+    bpf_printk("\n");
+    bpf_printk("Changed dest MAC = ");
+        #pragma unroll
+    for(int i=0; i<6; i++){
+        bpf_printk("%x",eth->h_dest[i]);
+    }
+    bpf_printk("\n");
     iph->saddr = dest->saddr;
     iph->daddr = dest->daddr;
     bpf_printk("Changed source ip : %d",iph->saddr);

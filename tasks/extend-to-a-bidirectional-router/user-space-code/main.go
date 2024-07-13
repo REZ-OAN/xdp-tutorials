@@ -100,8 +100,8 @@ func main() {
 	flag.StringVar(&src_id, "src_id", "", "source interface id")
 	flag.Parse()
 
-	if src_id == "" || dest_id == "" || iface == "" || dest_ip == "" || src_ip == "" || router_ip == "" || router_mac == "" || src_mac == "" || dest_mac == "" {
-		fmt.Println("[error] interface name not given")
+	if src_id == "" || dest_id == "" || iface == "" || dest_ip == "" || src_ip == "" || src_mac == "" || dest_mac == "" {
+		fmt.Printf("[error] argruments not given\n expected \n -src_ip source ip address\n-dest_ip destination ip address\n-src_mac source mac address\n-dest_mac destination mac address\n-src_id source interface id\n-dest_id destination interface id\n")
 		os.Exit(1)
 	}
 	source_ip := parseIP(src_ip)

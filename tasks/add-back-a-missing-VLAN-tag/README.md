@@ -1,12 +1,12 @@
-# Adding VLAN tags to a packet (which does not contain vlan tags)
+# Task-07 (adding vlan tags to a packet)
 
 ## Prerequisite
  - [How VLAN works and see the packet structure](https://github.com/REZ-OAN/xdp-tutorials/blob/main/docs/vlan-working.md)
 ## Introduction
-Now that you have come this far, you know how to parse the vlan tags data from the packets. Now in this task we are going to remove the outer-most vlan tags from the packet. You can setup the environment like in the task [adding-vlan-support](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/adding-vlan-support) describes. But you have to keep in mind that to use the Makefile you have to be on this `tasks/add-back-a-missing-VLAN-tag` directory.
+Now that you have come this far, you know how to parse the vlan tags data from the packets. Now in this task we are going to add the outer-most vlan tag to the packet. You can setup the environment like in the task [adding-vlan-support](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/adding-vlan-support) describes. But you have to keep in mind that to use the Makefile you have to be on this `tasks/add-back-a-missing-VLAN-tag` directory.
 
 ## How to move the pointer on ctx
-The `bpf_xdp_adjust_head` function is used to adjust the packet's data pointer, effectively modifying the beginning of the packet. In this specific call, it is used to remove the VLAN header from the packet.
+The `bpf_xdp_adjust_head` function is used to adjust the packet's data pointer, effectively modifying the beginning of the packet. In this specific call, it is used to set the pointer back to  the VLAN header in that packet.
 ```
 bpf_xdp_adjust_head(ctx, 0 - vlh_size)
 ```

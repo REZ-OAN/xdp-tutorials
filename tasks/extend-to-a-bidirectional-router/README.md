@@ -35,6 +35,9 @@ make < exec_ns1 or exec_ns2 >
 
 This code implements an `XDP` (eXpress Data Path) program for packet processing and routing in Linux. It handles both `IPv4` and `ARP` packets, performing packet **redirection** and address translation based on a predefined map of `backend` servers. The program parses Ethernet, VLAN, IP, and ARP headers, and can construct `ARP` replies for incoming ARP requests. For `IPv4` packets, it modifies the source and destination MAC and IP addresses based on the information stored in the redirect_packets map. The code also includes extensive error checking and debugging output using `bpf_printk()`.
 
+### Packet Flow (expected)
+
+![expected-packet-flow](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/extend-to-a-bidirectional-router/images/packet-flow.png)
 Let's try on your own how it works :
 
 Firtly you have to navigate to `tasks/extend-to-a-bidirectional-router/user-space-code` this directory. Now You can proceed with following procedure :
@@ -87,3 +90,6 @@ sudo ./xdp-redirect -iface test-br -src_ip 10.10.20.5 -dest_ip 10.10.20.7 -src_m
 ## Testing with applying **TCPDUMP** first then attaching the XDP program
 
 ![tcpdump-first-xdp-attach-second](https://github.com/REZ-OAN/xdp-tutorials/blob/main/tasks/extend-to-a-bidirectional-router/images/ftcpdump-sxdp.png)
+
+
+**Note**: This tasks is in inspection now. Not completed yet. I need to figure out why it's working when I apply **TCPDUMP** on the `test-br`.
